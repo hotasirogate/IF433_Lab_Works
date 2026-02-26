@@ -1,13 +1,17 @@
 package oop_00000077278_HotasiRogateManurung_week03
 
+import oop_00000077278_HotasiRogateManurung_week02.Weapon
+
 fun main() {
-    val e = Employee("Budi")
 
-    e.salary = -1000
-    e.salary = 500000
-    println("Gaji: ${e.salary}")
+    val weapon = Weapon("Dragon Blade", 600)
 
-    e.increasePerformance()
+    // Set damage ke -50 (harus gagal)
+    weapon.damage = -50
 
-    println("Pajak yang harus dibayar: ${e.tax}")
+    // Set damage ke 9999 (harus jadi 1000)
+    weapon.damage = 9999
+
+    // Print tier
+    println("Tier Weapon: ${weapon.tier}")
 }

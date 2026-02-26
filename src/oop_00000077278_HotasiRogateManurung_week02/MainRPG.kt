@@ -1,32 +1,74 @@
 package oop_00000077278_HotasiRogateManurung_week02
 
+import java.util.Scanner
+
 fun main() {
+
+    val scanner = Scanner(System.`in`)
 
     println("--- MINI RPG BATTLE ---")
 
-    val hero1 = Hero("Knight", 20)
-    val hero2 = Hero("Orc", 15)
+    // 1. Input Hero
+    print("Masukkan Nama Hero: ")
+    val heroName = scanner.nextLine()
 
-    println("${hero1.name} HP: ${hero1.hp}")
-    println("${hero2.name} HP: ${hero2.hp}")
-    println()
+    print("Masukkan Base Damage Hero: ")
+    val heroDamage = scanner.nextInt()
 
-    // Turn 1
-    hero1.attack(hero2.name)
-    hero2.takeDamage(hero1.baseDamage)
+    val hero = Hero(heroName, heroDamage)
 
-    println("${hero2.name} HP sekarang: ${hero2.hp}")
-    println()
+    // 2. Enemy hanya variabel
+    var enemyHp = 100
 
-    // Turn 2
-    hero2.attack(hero1.name)
-    hero1.takeDamage(hero2.baseDamage)
+    println("\nMusuh muncul dengan HP: $enemyHp")
+    println("${hero.name} HP: ${hero.hp}")
 
-    println("${hero1.name} HP sekarang: ${hero1.hp}")
-    println()
+    // 3. Main Loop
+    while (hero.isAlive() && enemyHp > 0) {
 
-    // Status akhir
-    println("--- STATUS AKHIR ---")
-    println("${hero1.name} hidup? ${hero1.isAlive()}")
-    println("${hero2.name} hidup? ${hero2.isAlive()}")
+        println("\n=== MENU ===")
+        println("1. Serang")
+        println("2. Kabur")
+        print("Pilih aksi: ")
+
+        val choice = scanner.nextInt()
+
+        if (choice == 1) {
+
+            // Hero menyerang
+            hero.attack("Musuh")
+            enemyHp -= hero.baseDamage
+
+            if (enemyHp < 0) {
+                enemyHp = 0
+            }
+
+            println("Sisa HP Musuh: $enemyHp")
+
+            // Jika musuh masih hidup, dia balas
+            if (enemyHp > 0) {
+                val enemyDamage = (10..20).random()
+                println("Musuh membalas dan memberikan $enemyDamage damage!")
+                hero.takeDamage(enemyDamage)
+                println("Sisa HP ${hero.name}: ${hero.hp}")
+            }
+
+        } else if (choice == 2) {
+            println("${hero.name} kabur dari pertarungan!")
+            break
+        } else {
+            println("Pilihan tidak valid!")
+        }
+    }
+
+    // 4. Pengumuman pemenang
+    println("\n=== HASIL PERTARUNGAN ===")
+
+    if (hero.hp > 0 && enemyHp == 0) {
+        println("${hero.name} MENANG!")
+    } else if (hero.hp == 0 && enemyHp > 0) {
+        println("Musuh MENANG!")
+    } else {
+        println("Pertarungan berakhir tanpa pemenang.")
+    }
 }

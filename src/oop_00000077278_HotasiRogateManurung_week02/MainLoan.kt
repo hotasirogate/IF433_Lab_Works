@@ -15,10 +15,21 @@ fun main() {
     val borrower = scanner.nextLine()
 
     print("Masukkan Durasi Pinjam (hari): ")
-    val duration = scanner.nextInt()
+    var duration = scanner.nextInt()
 
+    // Validasi: tidak boleh minus
+    if (duration < 0) {
+        println("Durasi tidak boleh minus! Diubah menjadi 1 hari.")
+        duration = 1
+    }
+
+    // Buat object Loan
     val loan = Loan(title, borrower, duration)
 
-    println("\n--- HASIL ---")
-    println("Total Denda: Rp ${loan.calculateFine()}")
+    // Print detail peminjaman
+    println("\n--- DETAIL PEMINJAMAN ---")
+    println("Judul Buku   : ${loan.bookTitle}")
+    println("Peminjam     : ${loan.borrower}")
+    println("Durasi Pinjam: ${loan.loanDuration} hari")
+    println("Total Denda  : Rp ${loan.calculateFine()}")
 }

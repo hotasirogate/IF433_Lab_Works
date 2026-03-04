@@ -1,18 +1,18 @@
-import oop_00000077278_HotasiRogateManurung_week05.EWallet
+package oop_00000077278_HotasiRogateManurung_week05
 
 fun main() {
-    val ewallet = EWallet("Hotasi Rogate", 100000.0)
 
-    ewallet.processPayment(50000.0)
-    ewallet.processPayment(60000.0)
+    // Buat objek EWallet dan CreditCard
+    val eWallet = EWallet("Hotasi Rogate", 50000.0)
+    val creditCard = CreditCard("Hotasi Rogate", 100000.0)
 
-    ewallet.topUp(20000.0)
-    ewallet.processPayment(60000.0)
+    // Masukkan ke dalam list bertipe PaymentMethod
+    val paymentMethods: List<PaymentMethod> = listOf(eWallet, creditCard)
 
-    val creditCard = CreditCard("Hotasi Rogate", 5000000.0)
-
-    creditCard.processPayment(2000000.0)
-    creditCard.processPayment(2500000.0)
-    creditCard.processPayment(1000000.0) // Ini akan ditolak
-}
+    // Lakukan perulangan dan panggil processPayment
+    for (method in paymentMethods) {
+        println("Memproses pembayaran menggunakan ${method.accountName}")
+        method.processPayment(75000.0)
+        println("-----------------------------")
+    }
 }

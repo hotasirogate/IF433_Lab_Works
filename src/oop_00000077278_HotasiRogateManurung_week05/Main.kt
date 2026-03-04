@@ -1,18 +1,11 @@
-package oop_00000077278_HotasiRogateManurung_week05
+import oop_00000077278_HotasiRogateManurung_week05.EWallet
 
 fun main() {
-    val mathHelper = MathHelper()
+    val ewallet = EWallet("Hotasi Rogate", 100000.0)
 
-    println("Luas Persegi: " + mathHelper.hitungLuas(4))
-    println("Luas Persegi Panjang: " + mathHelper.hitungLuas(5, 3))
-    println("Luas Lingkaran: " + mathHelper.hitungLuas(7.0))
+    ewallet.processPayment(50000.0)
+    ewallet.processPayment(60000.0)
 
-    val luasPersegi = mathHelper.hitungLuas(4)
-    val luasPersegiPanjang = mathHelper.hitungLuas(6, 3)
-    val luasLingkaran = mathHelper.hitungLuas(7.0)
-
-    println("Luas Persegi (sisi = 4) = $luasPersegi")
-    println("Luas Persegi Panjang (6 x 3) = $luasPersegiPanjang")
-    println("Luas Lingkaran (r = 7.0) = $luasLingkaran")
-
+    ewallet.topUp(20000.0)
+    ewallet.processPayment(60000.0)
 }

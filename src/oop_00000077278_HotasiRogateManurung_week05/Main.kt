@@ -8,4 +8,11 @@ fun main() {
 
     ewallet.topUp(20000.0)
     ewallet.processPayment(60000.0)
+
+    val creditCard = CreditCard("Hotasi Rogate", 5000000.0)
+
+    creditCard.processPayment(2000000.0)
+    creditCard.processPayment(2500000.0)
+    creditCard.processPayment(1000000.0) // Ini akan ditolak
+}
 }

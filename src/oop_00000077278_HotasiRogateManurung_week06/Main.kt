@@ -27,6 +27,13 @@ fun main() {
     hub.addDevice(speaker)
     hub.addDevice(cctv)
 
+
+    println("\n=== Mengaktifkan Security Mode ===")
+    hub.activateSecurityMode()
+
+    println("\n=== Mematikan Semua Switchable Device ===")
+    hub.turnOffAllSwitches()
+
     println("\n=== TESTING CHECKOUT ===")
     processCheckout(pay1, 50000.0)
     processCheckout(pay2, 150000.0)

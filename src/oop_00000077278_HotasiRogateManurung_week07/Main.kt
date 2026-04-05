@@ -40,4 +40,9 @@ fun main() {
     println(uiMessage)
 
     GameManager.startGame()//pertama kali
+
+    val item = ItemRarity.LEGENDARY
+    println("Rarity: $item")
+    println("Drop chance: ${item.dropChance}%")
+
 }

@@ -39,10 +39,19 @@ fun main() {
 
     println(uiMessage)
 
+    println("\n=== Sistem Core Game RPG Sederhana ===")
     GameManager.startGame()//pertama kali
 
     val item = ItemRarity.LEGENDARY
     println("Rarity: $item")
     println("Drop chance: ${item.dropChance}%")
+
+    val sword = GameItem("Excalibur", 100, ItemRarity.LEGENDARY)
+
+    println(sword)
+    println("Nama: ${sword.name}")
+    println("Damage: ${sword.damage}")
+    println("Rarity: ${sword.rarity}")
+    println("Drop Chance: ${sword.rarity.dropChance}%")
 
 }

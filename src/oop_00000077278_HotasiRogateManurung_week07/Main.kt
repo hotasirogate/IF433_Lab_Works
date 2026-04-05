@@ -13,25 +13,24 @@ fun main() {
     val reg1 = RegularUser("Alice", 22)
     val reg2 = RegularUser("Alice", 22)
     println(reg1)
-    println("Sama? ${reg1 == reg2}") //False
+    println("Sama? ${reg1 == reg2}") // False
 
     println("\n=== TEST DATA CLASS ===")
     val data1 = DataUser("Alice", 22)
     val data2 = DataUser("Alice", 22)
     println(data1)
-    println("Sama? ${data1 == data2}") // True (Structural Equality)
+    println("Sama? ${data1 == data2}") // True
 
     val data3 = data1.copy(age = 23)
     println("Hasil Copy: $data3")
 
-    val (userName, userAge) = data1 // Destructuring Declaration
+    val (userName, userAge) = data1
     println("Destructured: $userName berumur $userAge")
 
     println("\n=== TEST SEALED CLASS ===")
     val response: ApiResponse = ApiResponse.Success("Data berhasil ditarik!")
 
-    // error: 'when' expression must be exhaustive
-    val uiMessage = when(response) {
+    val uiMessage = when (response) {
         is ApiResponse.Success -> "Tampilkan: ${response.data}"
         is ApiResponse.Error -> "Munculkan: ${response.message}"
         ApiResponse.Loading -> "Tampilkan Spinner"
@@ -40,11 +39,12 @@ fun main() {
     println(uiMessage)
 
     println("\n=== Sistem Core Game RPG Sederhana ===")
-    GameManager.startGame()//pertama kali
+    GameManager.startGame()
 
-    val item = ItemRarity.LEGENDARY
-    println("Rarity: $item")
-    println("Drop chance: ${item.dropChance}%")
+    // FIX: ganti nama variable supaya tidak bentrok
+    val rarityItem = ItemRarity.LEGENDARY
+    println("Rarity: $rarityItem")
+    println("Drop chance: ${rarityItem.dropChance}%")
 
     val sword = GameItem("Excalibur", 100, ItemRarity.LEGENDARY)
 
@@ -71,4 +71,11 @@ fun main() {
 
     println(message)
 
+    processEvent(BattleState.MonsterEncounter("Goblin"))
+
+    val itemDrop = GameItem("Pedang Api", 50, ItemRarity.RARE)
+    processEvent(BattleState.LootDropped(itemDrop))
+
+    processEvent(BattleState.GameOver("Dikalahkan Boss"))
+    processEvent(BattleState.SafeZone)
 }

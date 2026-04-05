@@ -60,4 +60,15 @@ fun main() {
     println("Starter: ${starter.item.name}, Damage: ${starter.item.damage}, Durability: ${starter.durability}")
     println("Epic: ${epic.item.name}, Damage: ${epic.item.damage}, Durability: ${epic.durability}")
 
+    val state: BattleState = BattleState.MonsterEncounter("Goblin")
+
+    val message = when (state) {
+        is BattleState.MonsterEncounter -> "Musuh muncul: ${state.monsterName}"
+        is BattleState.LootDropped -> "Dapat item: ${state.item.name}"
+        is BattleState.GameOver -> "Game Over: ${state.reason}"
+        BattleState.SafeZone -> "Kamu berada di zona aman"
+    }
+
+    println(message)
+
 }

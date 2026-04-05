@@ -38,7 +38,7 @@ fun main() {
 
     println(uiMessage)
 
-    println("\n=== Sistem Core Game RPG Sederhana ===")
+    println("\n=== TEST GAME MANAGER (Singleton) ===")
     GameManager.startGame()
 
     // FIX: ganti nama variable supaya tidak bentrok

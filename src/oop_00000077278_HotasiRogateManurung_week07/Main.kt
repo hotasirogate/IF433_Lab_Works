@@ -78,4 +78,24 @@ fun main() {
 
     processEvent(BattleState.GameOver("Dikalahkan Boss"))
     processEvent(BattleState.SafeZone)
+
+    println("\n=== SIMULASI UPGRADE & EVENT ===")
+
+// Ambil senjata awal (starter)
+    val starterWeapon = Weapon.forgeStarterSword()
+
+// Gunakan copy() untuk upgrade damage (immutability tetap terjaga)
+    val upgradedItem = starterWeapon.item.copy(damage = 25)
+
+    println("Senjata lama: ${starterWeapon.item}")
+    println("Senjata baru (upgrade): $upgradedItem")
+
+// Simulasi event berurutan
+    processEvent(BattleState.SafeZone)
+
+    processEvent(BattleState.MonsterEncounter("Goblin Nakal"))
+
+    processEvent(BattleState.LootDropped(upgradedItem))
+
+    processEvent(BattleState.GameOver("Terkena jebakan racun"))
 }

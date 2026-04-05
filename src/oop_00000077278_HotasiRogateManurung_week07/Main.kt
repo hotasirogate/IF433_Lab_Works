@@ -38,4 +38,6 @@ fun main() {
     }
 
     println(uiMessage)
+
+    GameManager.startGame()//pertama kali
 }

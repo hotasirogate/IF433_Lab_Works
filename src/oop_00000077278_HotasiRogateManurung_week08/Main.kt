@@ -4,7 +4,7 @@ fun main() {
     println("=== TEST SAFE CALLS & ELVIS ===")
     val emptyOrder = Order(null, null)
 
-    val destination = emptyOrder.deliveryDetails?.address?.city?.name ?: "Kota Tidak Diketahui"
+    val destination = emptyOrder.deliveryDetails?.address?.city?.name ?: "kota tidak diketahui"
     println("Tujuan Pengiriman: $destination")
 
     val validOrder = Order(null, 250000)

@@ -13,4 +13,12 @@ fun main() {
 
     // Contoh verifikasi data (Opsional)
     println("Total log masuk: ${tradeHistory.size}")
+
+    // Pipeline 1: Mengambil hanya transaksi yang sudah selesai
+    val closedTrades = tradeHistory.filter { it.status == "CLOSED" }
+
+// Verifikasi hasil (Cetak untuk memastikan filter bekerja)
+    println("--- Pipeline 1: Filter Closed Trades ---")
+    println("Total transaksi selesai: ${closedTrades.size}")
+    closedTrades.forEach { println("${it.pair} | ROE: ${it.roe}%") }
 }

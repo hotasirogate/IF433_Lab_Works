@@ -21,4 +21,12 @@ fun main() {
     println("--- Pipeline 1: Filter Closed Trades ---")
     println("Total transaksi selesai: ${closedTrades.size}")
     closedTrades.forEach { println("${it.pair} | ROE: ${it.roe}%") }
+
+    // Pipeline 2: Filter transaksi yang profit (ROE > 0)
+    val winningTrades = closedTrades.filter { it.roe > 0.0 }
+
+// Verifikasi hasil
+    println("\n--- Pipeline 2: Winning Trades ---")
+    println("Jumlah transaksi profit: ${winningTrades.size}")
+    winningTrades.forEach { println("Winner: ${it.pair} dengan profit ${it.roe}%") }
 }

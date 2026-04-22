@@ -59,4 +59,13 @@ fun main() {
 // Menampilkan hasil
     println("\n--- Pipeline 5: Worst Performers String ---")
     worstPerformersString.forEach { println(it) }
+
+    // Pipeline Tambahan: Mengambil daftar koin unik yang pernah ditradingkan
+    val uniquePairs = tradeHistory
+        .map { it.pair } // Mengekstrak hanya nama pair-nya (String)
+        .toSet()         // Mengonversi List menjadi Set untuk menghapus duplikat
+
+// Menampilkan hasil
+    println("\n--- Daftar Koin yang Pernah Ditradingkan ---")
+    println("Koin: $uniquePairs")
 }

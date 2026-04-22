@@ -68,4 +68,24 @@ fun main() {
 // Menampilkan hasil
     println("\n--- Daftar Koin yang Pernah Ditradingkan ---")
     println("Koin: $uniquePairs")
+
+    // Mencetak Header Dashboard
+    println("\n==============================================")
+    println("===         CRYPTO TRADING DASHBOARD       ===")
+    println("==============================================")
+
+// Menampilkan Top Performers (Cuan)
+    println("\n[ TOP PERFORMERS ]")
+    topPerformersString.forEach { println(it) }
+
+// Menampilkan Worst Performers (Boncos)
+    println("\n[ WORST PERFORMERS ]")
+    worstPerformersString.forEach { println(it) }
+
+// Menampilkan Statistik Aset
+    println("\n[ ASSETS TRADED ]")
+    println("Pairs: ${uniquePairs.joinToString(", ")}")
+
+    println("\n==============================================")
+    println("Dashboard Status: Updated Successfully")
 }

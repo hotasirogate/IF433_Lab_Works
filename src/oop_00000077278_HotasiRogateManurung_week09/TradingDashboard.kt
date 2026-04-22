@@ -37,4 +37,15 @@ fun main() {
     println("\n--- Pipeline 3: Losing Trades ---")
     println("Jumlah transaksi loss: ${losingTrades.size}")
     losingTrades.forEach { println("Loss: ${it.pair} dengan ROE ${it.roe}%") }
+
+    // Pipeline 4: Mengurutkan dari profit tertinggi dan mengubah formatnya menjadi String
+    val topPerformersString = winningTrades
+        .sortedByDescending { it.roe } // Mengurutkan berdasarkan ROE terbesar ke terkecil
+        .map {
+            "WIN [${it.pair} - ${it.position}]: +${it.roe}% ROE (Lev: ${it.leverage}x)"
+        }
+
+// Menampilkan hasil
+    println("\n--- Pipeline 4: Top Performers String ---")
+    topPerformersString.forEach { println(it) }
 }

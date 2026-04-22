@@ -88,4 +88,22 @@ fun main() {
 
     println("\n==============================================")
     println("Dashboard Status: Updated Successfully")
+
+    // Melanjutkan pencetakan dari langkah sebelumnya...
+
+    // 1. Menampilkan baris loss menggunakan forEach
+    println("\n[ WORST PERFORMERS ]")
+    worstPerformersString.forEach { barisLoss ->
+        println(barisLoss)
+    }
+
+    // 2. Mencetak koin unik yang pernah ditradingkan
+    println("\n[ UNIQUE PAIRS TRADED ]")
+    println("Pairs: $uniquePairs")
+
+    // Penutup Dashboard
+    println("\n==============================================")
+    println("Dashboard Generated at: ${java.time.LocalDateTime.now()}")
+    println("==============================================")
+
 }

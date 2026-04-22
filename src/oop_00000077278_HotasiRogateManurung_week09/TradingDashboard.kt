@@ -29,4 +29,12 @@ fun main() {
     println("\n--- Pipeline 2: Winning Trades ---")
     println("Jumlah transaksi profit: ${winningTrades.size}")
     winningTrades.forEach { println("Winner: ${it.pair} dengan profit ${it.roe}%") }
+
+    // Pipeline 3: Filter transaksi yang rugi atau impas (ROE <= 0)
+    val losingTrades = closedTrades.filter { it.roe <= 0.0 }
+
+// Verifikasi hasil
+    println("\n--- Pipeline 3: Losing Trades ---")
+    println("Jumlah transaksi loss: ${losingTrades.size}")
+    losingTrades.forEach { println("Loss: ${it.pair} dengan ROE ${it.roe}%") }
 }

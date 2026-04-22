@@ -48,4 +48,15 @@ fun main() {
 // Menampilkan hasil
     println("\n--- Pipeline 4: Top Performers String ---")
     topPerformersString.forEach { println(it) }
+
+    // Pipeline 5: Mengurutkan dari kerugian terdalam dan mengubah format menjadi String
+    val worstPerformersString = losingTrades
+        .sortedBy { it.roe } // Mengurutkan dari nilai terkecil (minus paling besar)
+        .map {
+            "LOSS [${it.pair} - ${it.position}]: ${it.roe}% ROE (Lev: ${it.leverage}x)"
+        }
+
+// Menampilkan hasil
+    println("\n--- Pipeline 5: Worst Performers String ---")
+    worstPerformersString.forEach { println(it) }
 }

@@ -1,0 +1,16 @@
+package oop_00000077278_HotasiRogateManurung_week09
+
+fun main() {
+    // Inisialisasi Data Uji sesuai kriteria
+    val tradeHistory = listOf(
+        TradeLog("BTCUSDT", "LONG", 20, 15.5, "CLOSED"),   // Profit
+        TradeLog("ETHUSDT", "SHORT", 10, -5.0, "CLOSED"),  // Loss
+        TradeLog("BTCUSDT", "LONG", 50, 25.0, "CLOSED"),   // Profit
+        TradeLog("SOLUSDT", "SHORT", 12, -12.5, "CLOSED"), // Loss
+        TradeLog("ETHUSDT", "LONG", 20, 0.0, "OPEN"),      // Masih jalan
+        TradeLog("BTCUSDT", "LONG", 10, 8.0, "CLOSED")     // Profit
+    )
+
+    // Contoh verifikasi data (Opsional)
+    println("Total log masuk: ${tradeHistory.size}")
+}

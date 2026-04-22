@@ -106,4 +106,62 @@ fun main() {
     println("Dashboard Generated at: ${java.time.LocalDateTime.now()}")
     println("==============================================")
 
+    // Pastikan TradeLog sudah didefinisikan (di file yang sama atau TradingModels.kt)
+    data class TradeLog(
+        val pair: String,
+        val position: String,
+        val leverage: Int,
+        val roe: Double,
+        val status: String
+    )
+
+    fun main() {
+        // 2. Inisialisasi Data Uji
+        val tradeHistory = listOf(
+            TradeLog("BTCUSDT", "LONG", 20, 15.5, "CLOSED"),
+            TradeLog("ETHUSDT", "SHORT", 10, -5.2, "CLOSED"),
+            TradeLog("BTCUSDT", "LONG", 50, 25.0, "CLOSED"),
+            TradeLog("SOLUSDT", "SHORT", 12, -12.5, "CLOSED"),
+            TradeLog("ETHUSDT", "LONG", 20, 0.0, "OPEN"),      // Tidak boleh muncul di hasil akhir
+            TradeLog("BTCUSDT", "LONG", 10, 8.0, "CLOSED")
+        )
+
+        // 3. Pipeline 1: Ekstraksi Data Valid (Filter CLOSED)
+        val closedTrades = tradeHistory.filter { it.status == "CLOSED" }
+
+        // 4. Pipeline 2: Memisahkan Winning Trades (ROE > 0)
+        val winningTrades = closedTrades.filter { it.roe > 0 }
+
+        // 5. Pipeline 3: Memisahkan Losing Trades (ROE <= 0)
+        val losingTrades = closedTrades.filter { it.roe <= 0 }
+
+        // 6. Pipeline 4: Analisis Koin Profit Tertinggi (Sorting & Mapping)
+        val topPerformersString = winningTrades
+            .sortedByDescending { it.roe }
+            .map { "WIN [${it.pair} - ${it.position}]: +${it.roe}% ROE (Lev: ${it.leverage}x)" }
+
+        // 7. Pipeline 5: Analisis Koin Loss (Sorting & Mapping)
+        val worstPerformersString = losingTrades
+            .sortedBy { it.roe }
+            .map { "LOSS [${it.pair} - ${it.position}]: ${it.roe}% ROE (Lev: ${it.leverage}x)" }
+
+        // 8. Pipeline Tambahan: Ekstraksi Unik (Set)
+        val uniquePairs = tradeHistory
+            .map { it.pair }
+            .toSet()
+
+        // 9 & 10. Menampilkan Dashboard Utama
+        println("=== CRYPTO TRADING DASHBOARD ===")
+
+        println("\n[ TOP PERFORMERS ]")
+        topPerformersString.forEach { println(it) }
+
+        println("\n[ WORST PERFORMERS ]")
+        worstPerformersString.forEach { println(it) }
+
+        println("\n[ ASSETS TRADED ]")
+        println("Unique Pairs: $uniquePairs")
+
+        println("\n================================")
+    }
 }

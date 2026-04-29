@@ -31,4 +31,20 @@ fun main() {
     coinRepo.getAll().forEach {
         println("Nama: ${it.name}, Balance: ${it.balance}")
     }
+
+    // ===============================
+    // Tambahan: Repository Transaksi
+    // ===============================
+
+    val txRepo = WalletRepository<Transaction>()
+
+    // Tambahkan transaksi fiktif
+    txRepo.add(Transaction("TX001", 500.0))
+    txRepo.add(Transaction("TX002", 250.0))
+    txRepo.add(Transaction("TX003", 1000.0))
+
+    println("\nDaftar Transaksi:")
+    txRepo.getAll().forEach {
+        println("ID: ${it.id}, Amount: ${it.amount}")
+    }
 }

@@ -17,6 +17,16 @@ fun main() {
     coinRepo.add(Coin("ETH", 2.5))
     coinRepo.add(Coin("USDT", 1000.0))
 
+    // Simulasi response jaringan
+    val response = ApiResponse("200 OK", coinRepo.getAll())
+
+    println("Response API:")
+    println("Status: ${response.status}")
+    println("Data:")
+    response.data.forEach {
+        println("Nama: ${it.name}, Balance: ${it.balance}")
+    }
+
     println("Daftar Coin:")
     coinRepo.getAll().forEach {
         println("Nama: ${it.name}, Balance: ${it.balance}")

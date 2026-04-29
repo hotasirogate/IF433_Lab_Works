@@ -11,4 +11,14 @@ fun main() {
 
     println("Daftar Coin:")
     println(coinRepo.getAll())
+
+    // Menambahkan minimal 3 koin
+    coinRepo.add(Coin("BTC", 0.75))
+    coinRepo.add(Coin("ETH", 2.5))
+    coinRepo.add(Coin("USDT", 1000.0))
+
+    println("Daftar Coin:")
+    coinRepo.getAll().forEach {
+        println("Nama: ${it.name}, Balance: ${it.balance}")
+    }
 }

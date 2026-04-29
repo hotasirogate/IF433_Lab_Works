@@ -5,6 +5,12 @@ fun main() {
     val intBox = Box(100)
     val stringBox = Box("Generics in kotlin")
 
+    println("=== TEST GENERIC FUNCTION ===")
+    printData(3.14)
+    val result = processData("Stable Coin")
+    println("Hasill proses: $result")
+
+
     println("Isi intBox: ${intBox.value}")
     println("Isi stringBox: ${stringBox.value}")
 

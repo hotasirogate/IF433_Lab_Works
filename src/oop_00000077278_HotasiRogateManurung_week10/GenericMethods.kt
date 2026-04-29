@@ -4,6 +4,6 @@ fun <T> printData(data: T) {
     println("Data diterima: $data")
 }
 
-fun <T> processData(input: T) {
+fun <T> processData(input: T): T {
     return input
 }

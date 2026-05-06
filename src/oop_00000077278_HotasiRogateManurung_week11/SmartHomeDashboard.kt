@@ -21,4 +21,10 @@ fun main() {
         homeDevices.add(it)
     }
 
+    val acInverter = run {
+        val device = SmartDevice("Daikin Inverter (Kabel 3x2.5)", "HVAC", false, 800)
+        device
+    }
+    homeDevices.add(acInverter)
+
 }

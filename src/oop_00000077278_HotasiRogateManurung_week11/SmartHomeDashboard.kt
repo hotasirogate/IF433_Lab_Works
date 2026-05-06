@@ -40,5 +40,6 @@ fun main() {
         println(device.diagnose())
     }
 
+    val totalPower = homeDevices.run { sumOf { it.powerLoad } }
 
 }

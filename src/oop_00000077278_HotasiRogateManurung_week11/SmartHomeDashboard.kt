@@ -42,4 +42,10 @@ fun main() {
 
     val totalPower = homeDevices.run { sumOf { it.powerLoad } }
 
+    with(homeDevices) {
+        println("\n--- Rangkuman Sistem ---")
+        println("Total perangkat : ${this.size} unit")
+        println("Total beban daya: $totalPower Watt")
+        println("Status Dashboard: Berjalan Normal")
+    }
 }

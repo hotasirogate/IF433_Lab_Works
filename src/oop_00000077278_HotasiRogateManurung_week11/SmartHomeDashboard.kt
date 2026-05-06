@@ -35,4 +35,10 @@ fun main() {
         println(it.diagnose())
     }
 
+    println("\n--- Daftar Seluruh Perangkat (Dashboard) ---")
+    homeDevices.forEach { device ->
+        println(device.diagnose())
+    }
+
+
 }

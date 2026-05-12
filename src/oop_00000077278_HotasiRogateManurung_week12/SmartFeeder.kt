@@ -23,36 +23,24 @@ fun dispenseKibble(requestedGram: Int, availableGram: Int, isJammed: Boolean): I
 }
 
 fun main() {
-    // Inisialisasi stok awal
     var currentKibbleStock = 50
 
     println("--- Simulasi Jadwal Makan Pagi ---")
-    println("Stok saat ini: $currentKibbleStock gr")
 
     try {
-        // Memanggil fungsi dengan permintaan 80 gr (melebihi stok 50 gr)
         currentKibbleStock = dispenseKibble(
             requestedGram = 80,
             availableGram = currentKibbleStock,
             isJammed = false
         )
-
-        println("Sisa stok setelah makan pagi: $currentKibbleStock gr")
-
     } catch (e: DispenserJamException) {
-        // Menangani jika hardware macet
         println("Error Hardware: ${e.message}")
-
     } catch (e: FoodEmptyException) {
-        // Menangani jika stok tidak cukup (Ini yang akan terpanggil)
         println("Error Stok: ${e.message}")
-        println("Silakan isi ulang wadah makanan Anda.")
-
     } catch (e: Exception) {
-        // Menangani error tak terduga lainnya (termasuk IllegalArgumentException dari require)
         println("Error Tak Terduga: ${e.message}")
-
     } finally {
-        println("--- Selesai Memproses Jadwal Makan Pagi ---")
+        // Blok ini akan selalu dieksekusi apa pun yang terjadi
+        println("Siklus pengecekan dispenser pagi selesai.")
     }
 }

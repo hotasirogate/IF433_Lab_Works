@@ -43,4 +43,29 @@ fun main() {
         // Blok ini akan selalu dieksekusi apa pun yang terjadi
         println("Siklus pengecekan dispenser pagi selesai.")
     }
+
+    println("\n--- Simulasi Jadwal Makan Sore ---")
+
+    // Pemilik mengisi ulang alat sehingga stok menjadi 1000 gr
+    var currentKibbleStock = 1000
+
+    val result = runCatching {
+        dispenseKibble(
+            requestedGram = 30,
+            availableGram = currentKibbleStock,
+            isJammed = false
+        )
+    }
+
+    // Mengolah hasil secara fungsional
+    result.onSuccess { remainingStock ->
+        currentKibbleStock = remainingStock
+        println("Sore hari berhasil! Sisa stok sekarang: $currentKibbleStock gr")
+    }.onFailure { error ->
+        when (error) {
+            is DispenserJamException -> println("Gagal Sore: Hardware macet.")
+            is FoodEmptyException -> println("Gagal Sore: Stok habis.")
+            else -> println("Gagal Sore: ${error.message}")
+        }
+    }
 }

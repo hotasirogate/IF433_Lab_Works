@@ -69,25 +69,26 @@ fun main() {
         }
     }
 
-    // Inisialisasi setelah isi ulang
+    // Inisialisasi stok setelah isi ulang oleh pemilik
     var currentKibbleStock = 1000
     val requestedSore = 30
 
     println("--- Simulasi Jadwal Makan Sore ---")
 
-    // Menggunakan runCatching dengan chaining onSuccess
+    // Menjalankan operasi dengan gaya fungsional (runCatching)
     runCatching {
         dispenseKibble(
             requestedGram = requestedSore,
             availableGram = currentKibbleStock,
-            isJammed = false
+            isJammed = false // Alat dalam kondisi normal
         )
     }.onSuccess { newStock ->
-        // Blok ini hanya jalan jika tidak ada exception yang dilempar
+        // Jika berhasil, perbarui stok dan beri laporan
         currentKibbleStock = newStock
         println("Makan sore sukses! Sisa stok kibble: $currentKibbleStock gr")
     }.onFailure { error ->
-        // Opsional: menangani jika ada error tak terduga
-        println("Makan sore gagal: ${error.message}")
+        // Jika gagal (macet/habis), berikan peringatan dan solusi alternatif
+        println("Peringatan ke Pemilik: ${error.message}")
+        println("(Opsional: Berikan chicken jerky secara manual)")
     }
 }

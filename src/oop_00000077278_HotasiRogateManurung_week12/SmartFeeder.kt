@@ -68,4 +68,26 @@ fun main() {
             else -> println("Gagal Sore: ${error.message}")
         }
     }
+
+    // Inisialisasi setelah isi ulang
+    var currentKibbleStock = 1000
+    val requestedSore = 30
+
+    println("--- Simulasi Jadwal Makan Sore ---")
+
+    // Menggunakan runCatching dengan chaining onSuccess
+    runCatching {
+        dispenseKibble(
+            requestedGram = requestedSore,
+            availableGram = currentKibbleStock,
+            isJammed = false
+        )
+    }.onSuccess { newStock ->
+        // Blok ini hanya jalan jika tidak ada exception yang dilempar
+        currentKibbleStock = newStock
+        println("Makan sore sukses! Sisa stok kibble: $currentKibbleStock gr")
+    }.onFailure { error ->
+        // Opsional: menangani jika ada error tak terduga
+        println("Makan sore gagal: ${error.message}")
+    }
 }

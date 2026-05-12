@@ -26,16 +26,33 @@ fun main() {
     // Inisialisasi stok awal
     var currentKibbleStock = 50
 
-    println("--- Smart Feeder System Started ---")
-    println("Stok awal: $currentKibbleStock gr")
+    println("--- Simulasi Jadwal Makan Pagi ---")
+    println("Stok saat ini: $currentKibbleStock gr")
 
-    // Di sini kamu bisa menambahkan logika simulasi pemanggilan fungsi dispenseKibble
-    // Contoh penggunaan:
     try {
-        val porsi = 20
-        currentKibbleStock = dispenseKibble(porsi, currentKibbleStock, false)
-        println("Berhasil memberi makan. Stok sekarang: $currentKibbleStock gr")
+        // Memanggil fungsi dengan permintaan 80 gr (melebihi stok 50 gr)
+        currentKibbleStock = dispenseKibble(
+            requestedGram = 80,
+            availableGram = currentKibbleStock,
+            isJammed = false
+        )
+
+        println("Sisa stok setelah makan pagi: $currentKibbleStock gr")
+
+    } catch (e: DispenserJamException) {
+        // Menangani jika hardware macet
+        println("Error Hardware: ${e.message}")
+
+    } catch (e: FoodEmptyException) {
+        // Menangani jika stok tidak cukup (Ini yang akan terpanggil)
+        println("Error Stok: ${e.message}")
+        println("Silakan isi ulang wadah makanan Anda.")
+
     } catch (e: Exception) {
-        println("Gagal mengeluarkan kibble: ${e.message}")
+        // Menangani error tak terduga lainnya (termasuk IllegalArgumentException dari require)
+        println("Error Tak Terduga: ${e.message}")
+
+    } finally {
+        println("--- Selesai Memproses Jadwal Makan Pagi ---")
     }
 }

@@ -31,3 +31,18 @@ fun fromCsvTrade(line: String): TradeRecord? {
         null
     }
 }
+
+fun saveTrades(trades: List<TradeRecord>, path: String) {
+    try {
+        // Membuka PrintWriter secara aman. File akan otomatis di-close setelah blok selesai.
+        File(path).printWriter().use { writer ->
+            trades.forEach { trade ->
+                // Menulis hasil dari extension function toCsv() ke dalam file
+                writer.println(trade.toCsv())
+            }
+        }
+        println("(Log) Berhasil menyimpan ${trades.size} data transaksi ke $path")
+    } catch (e: Exception) {
+        println("(Log) Gagal menyimpan data ke file: ${e.message}")
+    }
+}

@@ -16,11 +16,9 @@ fun TradeRecord.toCsv(): String {
 
 fun fromCsvTrade(line: String): TradeRecord? {
     return try {
-        // Seluruh proses pemisahan teks berada di dalam blok try
+
         val tokens = line.split(",")
 
-        // Memaksa pengecekan indeks secara manual atau membiarkan IndexOutOfBoundsException
-        // terjadi jika kolom kurang, yang nantinya akan ditangkap oleh blok catch.
         val id = tokens[0].trim().toInt()
         val symbol = tokens[1].trim()
         val type = tokens[2].trim()
@@ -29,7 +27,6 @@ fun fromCsvTrade(line: String): TradeRecord? {
 
         TradeRecord(id, symbol, type, margin, pnl)
     } catch (e: Exception) {
-        // Menangkap segala bentuk Exception (NumberFormatException, IndexOutOfBoundsException, dll)
         println("(Log) Data korup diabaikan: $line")
         null
     }

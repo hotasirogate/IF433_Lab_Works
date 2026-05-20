@@ -22,7 +22,7 @@ class FoodEmptyException(
 )
 
 // Custom Exception 2
-class DispenserJamException :
+class DispenserJamException(string: String) :
     FeederException("Wadah dispenser tersangkut/macet!")
 
 fun dispenseFood(requested: Int, available: Int) {
@@ -32,5 +32,5 @@ fun dispenseFood(requested: Int, available: Int) {
     }
 
     // simulasi dispenser macet
-    throw DispenserJamException()
+    throw DispenserJamException("Mesin macet! Segera periksa wadah pengeluaran.")
 }

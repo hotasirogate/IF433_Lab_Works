@@ -1,12 +1,8 @@
 package oop_00000077278_HotasiRogateManurung_week12
 
-// 1. Definisi Custom Exceptions
-class DispenserJamException(message: String) : Exception(message)
-class FoodEmptyException(message: String) : Exception(message)
-
 // 2. Fungsi Utama Engine
 fun dispenseKibble(requestedGram: Int, availableGram: Int, isJammed: Boolean): Int {
-    // Validasi Input
+    // Validasi Input (Gunakan standar Kotlin require)
     require(requestedGram > 0) { "Porsi kibble harus lebih dari 0 gr" }
 
     // Validasi Hardware
@@ -15,16 +11,13 @@ fun dispenseKibble(requestedGram: Int, availableGram: Int, isJammed: Boolean): I
     }
 
     // Validasi Stok
-    if (requestedGram > availableGram) {
-        throw FoodEmptyException("Stok tidak cukup! Tersedia: $availableGram gr, Diminta: $requestedGram gr.")
-    }
 
     println("Kibble berhasil dikeluarkan!")
     return availableGram - requestedGram
 }
 
 fun main() {
-    // Inisialisasi stok awal (hanya deklarasi sekali di sini)
+    // Inisialisasi stok awal
     var currentKibbleStock = 50
 
     // --- SIMULASI JADWAL MAKAN PAGI (Try-Catch-Finally) ---
@@ -32,6 +25,7 @@ fun main() {
     println("Stok awal: $currentKibbleStock gr")
 
     try {
+        // Simulasi ini akan memicu FoodEmptyException karena 80 > 50
         currentKibbleStock = dispenseKibble(
             requestedGram = 80,
             availableGram = currentKibbleStock,
@@ -50,7 +44,7 @@ fun main() {
     // --- SIMULASI JADWAL MAKAN SORE (runCatching) ---
     println("\n--- Simulasi Jadwal Makan Sore ---")
 
-    // Pemilik mengisi ulang alat (update nilai, jangan gunakan 'var' lagi)
+    // Pemilik mengisi ulang alat
     currentKibbleStock = 1000
     println("Pemilik mengisi ulang stok menjadi: $currentKibbleStock gr")
 
@@ -63,11 +57,9 @@ fun main() {
             isJammed = false
         )
     }.onSuccess { newStock ->
-        // Jika berhasil, perbarui stok utama
         currentKibbleStock = newStock
         println("Makan sore sukses! Sisa stok kibble: $currentKibbleStock gr")
     }.onFailure { error ->
-        // Jika gagal, berikan peringatan
         println("Peringatan ke Pemilik: ${error.message}")
         println("(Opsional: Berikan chicken jerky secara manual)")
     }

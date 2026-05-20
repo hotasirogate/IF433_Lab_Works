@@ -9,3 +9,7 @@ data class TradeRecord(
     val margin: Double,
     val pnl: Double
 )
+
+fun TradeRecord.toCsv(): String {
+    return "$id,$symbol,$type,$margin,$pnl"
+}

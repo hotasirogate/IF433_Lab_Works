@@ -46,3 +46,19 @@ fun saveTrades(trades: List<TradeRecord>, path: String) {
         println("(Log) Gagal menyimpan data ke file: ${e.message}")
     }
 }
+
+fun loadTrades(path: String): List<TradeRecord> {
+    return try {
+        // 1. Membaca seluruh baris teks di dalam file
+        // 2. Melakukan mapping dan otomatis mengabaikan nilai null (data korup)
+        File(path).readLines().mapNotNull { line ->
+            fromCsvTrade(line)
+        }
+    } catch (e: FileNotFoundException) {
+        println("(Log) Peringatan: File $path tidak ditemukan. Membuat daftar kosong baru.")
+        emptyList()
+    } catch (e: Exception) {
+        println("(Log) Gagal membaca file karena kesalahan sistem: ${e.message}")
+        emptyList()
+    }
+}

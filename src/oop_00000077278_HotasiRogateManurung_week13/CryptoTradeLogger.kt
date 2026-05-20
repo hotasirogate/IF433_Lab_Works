@@ -62,3 +62,49 @@ fun loadTrades(path: String): List<TradeRecord> {
         emptyList()
     }
 }
+
+fun main() {
+    val filePath = "crypto_trades.csv"
+
+    // --- (Proses Save dan Injection dari langkah 7 & 8) ---
+    val mockTrades = listOf(
+        TradeRecord(1, "BTCUSDT", "LONG", 250.0, 45.80),
+        TradeRecord(2, "ETHUSDT", "SHORT", 150.0, -12.50)
+    )
+    saveTrades(mockTrades, filePath)
+    File(filePath).appendText("CORRUPT_ID,DOGEUSDT,Hold,XX,YY\n")
+    println("--------------------------------------------------")
+
+
+    // ==========================================================
+    // 9. AGGREGATION & CALCULATION
+    // ==========================================================
+    println("=== [4] PROSES AGREGASI & KALKULASI PNL ===")
+
+    // Tarik histori transaksi dan simpan di variabel val loadedData
+    val loadedData: List<TradeRecord> = loadTrades(filePath)
+
+    // Hitung jumlah PnL bersih menggunakan higher-order function .sumOf
+    val netPnL = loadedData.sumOf { it.pnl }
+
+    // Menghitung total margin untuk insight tambahan
+    val totalMargin = loadedData.sumOf { it.margin }
+
+    // Tampilkan hasil kalkulasi ke dashboard
+    println("\n==================================================")
+    println("         REKAPITULASI HASIL BACKTESTING           ")
+    println("==================================================")
+    println(" Total Posisi Valid Terproses : ${loadedData.size} posisi")
+    println(" Total Margin Terpakai        : $totalMargin USDT")
+    println(" Total PnL Bersih (Net PnL)   : $netPnL USDT")
+
+    // Memberikan indikasi performa strategi berdasarkan hasil PnL bersih
+    if (netPnL > 0) {
+        println(" Status Strategi              : PROFIT (Bullish Perform)")
+    } else if (netPnL < 0) {
+        println(" Status Strategi              : LOSS (Evaluasi Kembali)")
+    } else {
+        println(" Status Strategi              : BREAK EVEN (SUT)")
+    }
+    println("==================================================")
+}
